@@ -1,0 +1,306 @@
+{
+  "Routes": [
+    {
+      "UpstreamPathTemplate": "/api/CompanyGroup",
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "customer",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/CompanyGroup"
+    },
+    {
+      "UpstreamPathTemplate": "/api/CompanyGroup/{id}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Patch", "Delete" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "customer",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/CompanyGroup/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/CompanyGroup/{name}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "customer",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/CompanyGroup/{name}"
+    },
+    //CompanyCategory
+    {
+      "UpstreamPathTemplate": "/api/CompanyCategory",
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "customer",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/CompanyCategory"
+    },
+    {
+      "UpstreamPathTemplate": "/api/CompanyCategory/{id}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Patch", "Delete" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "customer",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/CompanyCategory/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/CompanyCategory/{name}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "customer",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/CompanyCategory/{name}"
+    },
+    //Company
+    {
+      "UpstreamPathTemplate": "/api/Company",
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "customer",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Company"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Company/{id}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Patch", "Delete" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "customer",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Company/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Company/{name}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "customer",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Company/{name}"
+    },
+    //Role
+    {
+      "UpstreamPathTemplate": "/api/Role",
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "customer",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Role"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Role/{id}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Patch", "Delete" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "customer",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Role/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Role/{name}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "customer",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Role/{name}"
+    },
+    //Person
+    {
+      "UpstreamPathTemplate": "/api/Person",
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "customer",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Person"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Person/{id}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Patch", "Delete" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "customer",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Person/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Person/{name}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "customer",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Person/{name}"
+    },
+
+    //CATALOG
+    //Category
+    {
+      "UpstreamPathTemplate": "/api/Category",
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalog",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Category"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Category/{id}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Patch", "Delete" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalog",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Category/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Category/{name}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalog",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Category/{name}"
+    },
+    //Product
+    {
+      "UpstreamPathTemplate": "/api/Product",
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalog",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Product"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Product/{id}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Patch", "Delete" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalog",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Product/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Product/{name}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalog",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Product/{name}"
+    },
+    //PricedProduct
+    {
+      "UpstreamPathTemplate": "/api/PricedProduct",
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalog",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/PricedProduct"
+    },
+    {
+      "UpstreamPathTemplate": "/api/PricedProduct/{id}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Patch", "Delete" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalog",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/PricedProduct/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/PricedProduct/{name}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalog",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/PricedProduct/{name}"
+    }
+
+  ],
+
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:800"
+  }
+}

@@ -1,0 +1,337 @@
+﻿@page "/user"
+
+@using Costumer.Models
+@using Customer.Models
+@using Microsoft.AspNetCore.Components
+@using ProjectExamWebClient.Data.Services.CustomerServices
+@inject IRoleService roleService
+@inject ICompanyService companyService
+@inject IPersonLoginService personService
+@using ProjectExamWebClient.Interfaces
+@using System.Security.Cryptography.X509Certificates
+@using Syncfusion.Blazor.Grids
+@using Syncfusion.Blazor.RichTextEditor.Internal
+@using Syncfusion.Blazor.TreeGrid.Internal
+
+
+
+
+
+
+<EditForm Model="@newPerson" OnValidSubmit="@AddPerson">
+    <div>
+        <br /><br /><br /><br /><br />
+    </div>
+    <div>
+        <h3 style="font-weight:bold; color:purple">Book Stores Register</h3>
+    </div>
+    <div>
+        <br />
+    </div>
+    <div class="col-12 row">
+        <input class="form-control col-12" @bind="newPerson.FirstName" placeholder="first name" />
+    </div>
+    <br />
+    <div class="col-12 row">
+        <input class="form-control col-12" @bind="newPerson.LastName" placeholder="last name" />
+    </div>
+    <br />
+    <div class="col-12 row">
+        <input class="form-control col-12" @bind="newPerson.PhoneNumber" placeholder="telefonnummer" />
+    </div>
+    <br />
+    <div class="col-12 row">
+    <SfComboBox TItem="Company" TValue="string" DataSource="@companies" Placeholder="företag">
+        <ComboBoxEvents TValue="string" TItem="Company"  OnValueSelect="@OnCompanyValueSelectHandler"></ComboBoxEvents>
+        <ComboBoxFieldSettings Value="Id" Text="Name">
+        </ComboBoxFieldSettings>
+    </SfComboBox>
+    </div>
+    <br />
+    <div class="col-12 row">
+        <SfComboBox TItem="Role" TValue="string" DataSource="@roles" Placeholder="roll">
+            <ComboBoxEvents TValue="string" TItem="Role"  OnValueSelect="@OnRoleValueSelectHandler"></ComboBoxEvents>
+            <ComboBoxFieldSettings Value="Id" Text="Name">
+            </ComboBoxFieldSettings>
+        </SfComboBox>
+    </div>
+    <br />
+    <div class="col-12 row">
+        <input class="form-control col-12" @bind="newPerson.Email" placeholder="email address" />
+    </div>
+    <br />
+    <div class="col-12 row">
+        <input class="form-control col-12" @bind="newPerson.Password" placeholder="password" />
+    </div>
+    <br />
+    <br />
+    <div class="col-12 row">
+        <span class="col-12"></span>
+        <input type="submit" class="form-control col-6 btn btn-primary" value="Lägg Till Användare" />
+    </div>
+    <br />
+    <div class="col-12 row" style="text-align:left; font-weight:bold">
+        <span class="col-12">@LoginMessage</span>
+    </div>
+    
+    <div class="col-12">
+
+    <h3><b>Personer</b></h3>    
+   @* <SpinLoader IsLoading="isLoading">*@
+       @* <LoadingTemplate>
+            <div class="col-12" style="background-color: lightgray; height:400px; vertical-align:middle">
+                <br /><br />
+                <Chase Center="true" Color="#c21f13" Size="70px"></Chase>
+            </div>
+        </LoadingTemplate>*@
+        <ContentTemplate>
+            @* @if (filteredPersonList != null)
+            {
+                <GridView Items="persons" ReloadList="IsGridViewFiltered">
+                    <GridColumns>
+                        <GridColumn ColumnTitle="FirstName"
+                                    OnSearchTextChanged="@(e => OnPersonsSearchTextChanged(e, "Förnamn"))"></GridColumn>
+                        <GridColumn ColumnTitle="LastName"
+                                    OnSearchTextChanged="@(e => OnPersonsSearchTextChanged(e, "Efternamn"))"></GridColumn>
+                        <GridColumn ColumnTitle="City"
+                                    OnSearchTextChanged="@(e => OnPersonsSearchTextChanged(e, "Email"))"></GridColumn>
+                        <GridColumn ColumnTitle="AuthorId"
+                                    OnSearchTextChanged="@(e => OnPersonsSearchTextChanged(e, "Företag"))"></GridColumn>                       
+                        <GridColumn ColumnTitle="AuthorId"
+                                    OnSearchTextChanged="@(e => OnPersonsSearchTextChanged(e, "Roll"))"></GridColumn>
+                        <AuthorizeView Roles="Publisher" Policy="SeniorEmployee">
+                            <Authorized>
+                                <GridColumn ColumnTitle="Actions"></GridColumn>
+                            </Authorized>
+                        </AuthorizeView>
+                    </GridColumns>
+                    <GridRow Context="person">
+                        <td>
+                            <NavLink href=@string.Format("/authors/authordetail/{0}", @author.AuthorId)>
+                                @author.AuthorId
+                            </NavLink>
+                        </td>
+                        <td>@person.FirstName</td>
+                        <td>@person.LastName</td>
+                        <td>@person.Email</td>
+                        <td>@person.Company</td>
+                        <td>@person.Role</td>
+                        <AuthorizeView Roles="Publisher" Policy="SeniorEmployee">
+                            <Authorized>
+                                <th>
+                                    <a style="text-underline-position:below; cursor:pointer; color:blue" @onclick="(() => EditAuthor(person))">Edit</a> |
+                                    <a style="text-underline-position:below; cursor:pointer; color:blue" @onclick="(() => DeleteAuthor(person.AuthorId))">Delete</a>
+                                </th>
+                            </Authorized>
+                        </AuthorizeView>
+                    </GridRow>
+                </GridView>
+            }*@
+            @if(@persons != null)
+            {
+                 <SfDialog Target="#target"  Width="300px" ShowCloseIcon="true" @bind-Visible="Visibility" AllowPrerender="true" IsModal="true">
+                     <DialogTemplates>
+                         <Header> Uppdatera Person </Header>
+                         <Content>
+                             <div class="col-12 row">
+                                 <input class="form-control col-12" @bind="person.FirstName" placeholder="first name"/>
+                             </div>
+                             <br/>
+                             <div class="col-12 row">
+                                 <input class="form-control col-12" @bind="person.LastName" placeholder="last name"/>
+                             </div>
+                             <br/>
+                             <div class="col-12 row">
+                                 <input class="form-control col-12" @bind="person.PhoneNumber" placeholder="telefonnummer"/>
+                             </div>
+                             <br/>
+                             <div class="col-12 row">
+                                 <SfComboBox TItem="Company" TValue="string" DataSource="@companies" Placeholder="företag">
+                                     <ComboBoxEvents TValue="string" TItem="Company" OnValueSelect="@OnCompanyValueSelectHandler"></ComboBoxEvents>
+                                     <ComboBoxFieldSettings Value="Id" Text="Name">
+                                     </ComboBoxFieldSettings>
+                                 </SfComboBox>
+                             </div>
+                             <br/>
+                             <div class="col-12 row">
+                                 <SfComboBox TItem="Role" TValue="string" DataSource="@roles" Placeholder="roll">
+                                     <ComboBoxEvents TValue="string" TItem="Role" OnValueSelect="@OnRoleValueSelectHandler"></ComboBoxEvents>
+                                     <ComboBoxFieldSettings Value="Id" Text="Name">
+                                     </ComboBoxFieldSettings>
+                                 </SfComboBox>
+                             </div>
+                             <br/>
+                             <div class="col-12 row">
+                                 <input class="form-control col-12" @bind="person.Email" placeholder="email address"/>
+                             </div>
+                             <br/>
+                             <div class="col-12 row">
+                                 <input type="password" class="form-control col-12" @bind="person.Password" placeholder="password"/>
+                             </div>
+                             <br/>
+                             <div class="col-12 row">
+                                 <span class="col-12"></span>
+                                    
+                                 @*<input type="submit" class="form-control col-6 btn btn-primary" value="Uppdatera" />*@
+                             </div>
+                             <br />
+                         </Content>
+                            
+                     </DialogTemplates>
+                     <DialogButtons>
+                         <DialogButton Content="Uppdatera" IsPrimary="true" OnClick="@(() => UpdatePerson(person))"/>
+                         <DialogButton Content="Avbryt"  />
+                     </DialogButtons>
+                    </SfDialog>
+                   
+                
+                <SfGrid @ref="Grid" DataSource="@persons" AllowSorting="true">
+                    <GridColumns>
+                        <GridColumn Field=@nameof(Person.FirstName) HeaderText="Förnamn" TextAlign="TextAlign.Center" Width="60"></GridColumn>
+                        <GridColumn Field=@nameof(Person.LastName) HeaderText="Efternamn" TextAlign="TextAlign.Center" Width="60"></GridColumn>
+                        <GridColumn Field=@nameof(Person.Email) HeaderText="Email" TextAlign="TextAlign.Center" Width="60"></GridColumn>
+                        <GridColumn Field="Company.Name" HeaderText="Företag" TextAlign="TextAlign.Center" Width="60"></GridColumn>
+                        <GridColumn Field="Role.Name" HeaderText="Roll" TextAlign="TextAlign.Center" Width="60"></GridColumn>
+                        <GridColumn Field="Role.Name" HeaderText="Roll" TextAlign="TextAlign.Center" Width="60"></GridColumn>
+                        <AuthorizeView >
+                            <Authorized Context="Person">
+                            <GridColumn Field="" HeaderText=" " TextAlign="TextAlign.Center" Width="60">
+                                <Template Context="person">
+
+                                    @{
+                                        //var editPerson = (context as Person);
+
+                                        <div>
+                                            <a style="text-underline-position: below; cursor: pointer; color: blue" @onclick="(() => EditPerson(person))">Till Profil</a> |
+                                            <a style="text-underline-position: below; cursor: pointer; color: blue" @onclick="(() => DeletePerson(person))">Ta bort</a>
+                                        </div>
+
+                                    }
+                                </Template>
+                            </GridColumn>
+                            </Authorized>
+                        </AuthorizeView>
+                    </GridColumns>
+                </SfGrid>
+            }
+        </ContentTemplate>
+    @*</SpinLoader>*@
+</div>
+</EditForm>
+@code {
+    public Person newPerson { get; set; }
+    public Person person { get; set; }
+    public string LoginMessage { get; set; }
+    public IList<Role> roles { get; set; }
+    public IList<Person> filteredPersonList { get; set; }
+    public IList<Person> persons { get; set; }
+    public IList<Company> companies { get; set; }
+    public string confirmPassword { get; set; }
+    public int selectedRoleId { get; set; }
+    public int selectedCompanyId { get; set; }
+    public bool IsGridViewFiltered { get; set; }
+    SfGrid<Person> Grid { get; set; }
+    bool isLoading = true;
+    bool Visibility { get; set; } = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        newPerson = new Person();
+        person = new Person();
+        persons = new List<Person>();
+        companies = await PopulateCompanies();
+        roles = await PopulateRoles();
+        persons = await PopulatePersons();
+        await base.OnInitializedAsync();
+    }
+
+
+    private async Task<IList<Role>> PopulateRoles()
+    {
+        return await roleService.ListAllRoles();
+    }
+
+    private async Task<IList<Company>> PopulateCompanies()
+    {
+        return await companyService.ListAllCompanies();
+    }
+
+    private async Task<IList<Person>> PopulatePersons()
+    {
+        return await personService.ListAllPersons();
+    }
+
+    private void OnRoleValueSelectHandler(SelectEventArgs<Role> args)
+    {
+        selectedRoleId = args.ItemData.Id;
+    }
+
+    private void OnCompanyValueSelectHandler(SelectEventArgs<Company> args)
+    {
+        selectedCompanyId = args.ItemData.Id;
+    }
+
+    private async Task AddPerson()
+    {
+        if (newPerson.Password != confirmPassword)
+            LoginMessage = "Password don't match!!";
+
+        newPerson.CompanyId = selectedCompanyId;
+        newPerson.RoleId = selectedRoleId;
+        await personService.RegisterUserAsync(newPerson);
+        persons = await PopulatePersons();
+        person = new Person();
+        await Grid.Refresh();
+    }
+
+    private async Task EditPerson(Object obj)
+    {
+        Visibility = true;
+        person = (Person) obj;
+    }
+
+    private async Task DeletePerson(Object obj)
+    {
+        var tempPerson = (Person) obj;
+        if (!await personService.DeletePerson(tempPerson.Id))
+            LoginMessage = "Something went wrong";
+
+        persons = await PopulatePersons();
+        await Grid.Refresh();
+    }
+
+    private async Task UpdatePerson(Person person)
+    {
+
+    }
+
+    private void OnPersonsSearchTextChanged(ChangeEventArgs changeEventArgs, string columnTitle)
+    {
+        string searchText = changeEventArgs.Value.ToString();
+        IsGridViewFiltered = true;
+
+        switch (columnTitle)
+        {
+
+            case "Förnamn":
+                filteredPersonList = persons.Where(pers => pers.FirstName.ToLower().Contains(searchText)).ToList();
+                break;
+            case "Efternamn":
+                filteredPersonList = persons.Where(pers => pers.LastName.ToLower().Contains(searchText)).ToList();
+                break;
+            case "Företag":
+                filteredPersonList = persons.Where(pers => pers.Company.Name.ToLower().Contains(searchText)).ToList();
+                break;
+            case "Email":
+                filteredPersonList = persons.Where(pers => pers.FirstName.ToLower().Contains(searchText)).ToList();
+                break;
+            case "Roll":
+                filteredPersonList = persons.Where(pers => pers.Role.Name.ToString().Contains(searchText)).ToList();
+                break;
+            default:
+                Console.WriteLine("Default case");
+                break;
+        }
+    }
+
+}

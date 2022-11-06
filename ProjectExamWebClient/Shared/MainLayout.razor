@@ -1,0 +1,42 @@
+﻿@using ProjectExamWebClient.Data.Services.AuthProvider
+@inherits LayoutComponentBase
+@inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
+<PageTitle>ProjectExamWebClient</PageTitle>
+
+<div class="page">
+    <AuthorizeView>
+        <Authorized>
+            <div class="sidebar">
+                <NavMenu/>
+            </div>
+        </Authorized>
+    </AuthorizeView>
+    <main>
+        <div class="top-row px-4">
+            <AuthorizeView>
+                <Authorized>
+                    <a href="/user">Add User</a>
+                    <a href="/" @onclick="(() => Logout())">Logout</a>
+                </Authorized>
+                <NotAuthorized>
+                    <a href="/" target="_blank">Login</a>
+                </NotAuthorized>
+            </AuthorizeView>
+            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+        </div>
+
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div>
+
+@code
+{
+    public async Task Logout()
+    {
+        await ((StateProvider) AuthenticationStateProvider).MarkUserAsLogedOut();
+        NavigationManager.NavigateTo("/");
+    }
+}

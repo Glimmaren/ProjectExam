@@ -1,0 +1,56 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "2c561b83-96f8-4336-bc5e-759e3e3e8237": {
+      "ProjectGuid": "2c561b83-96f8-4336-bc5e-759e3e3e8237",
+      "DisplayName": "Catalog",
+      "ColorIndex": 0
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    },
+    "34018fce-67f2-4ce5-84bf-386dcda98b45": {
+      "ProjectGuid": "34018fce-67f2-4ce5-84bf-386dcda98b45",
+      "DisplayName": "Catalog",
+      "ColorIndex": 1
+    },
+    "c26ee3bd-ded3-4934-9803-28e97ad80848": {
+      "ProjectGuid": "c26ee3bd-ded3-4934-9803-28e97ad80848",
+      "DisplayName": "Customer",
+      "ColorIndex": 2
+    },
+    "d9641374-6669-45a3-ba56-eefeace28959": {
+      "ProjectGuid": "d9641374-6669-45a3-ba56-eefeace28959",
+      "DisplayName": "OcelotAPIGateway",
+      "ColorIndex": 3
+    },
+    "359d11e4-1a2c-4118-9b06-3dba5eb6d0ba": {
+      "ProjectGuid": "359d11e4-1a2c-4118-9b06-3dba5eb6d0ba",
+      "DisplayName": "docker-compose",
+      "ColorIndex": 4
+    },
+    "32eafc67-9e67-4d5c-a7de-7ac4cc0b965c": {
+      "ProjectGuid": "32eafc67-9e67-4d5c-a7de-7ac4cc0b965c",
+      "DisplayName": "OcelotApiGateway",
+      "ColorIndex": 5
+    },
+    "b4e7d0d8-3786-4c47-aa2a-a1ea1b90bae2": {
+      "ProjectGuid": "b4e7d0d8-3786-4c47-aa2a-a1ea1b90bae2",
+      "DisplayName": "GateWays",
+      "ColorIndex": 6
+    },
+    "d95a1fc3-5f25-4e25-8059-99e18d8db163": {
+      "ProjectGuid": "d95a1fc3-5f25-4e25-8059-99e18d8db163",
+      "DisplayName": "OcelotApiGateway",
+      "ColorIndex": 7
+    },
+    "4bb3596e-f971-4bb1-bb6c-d288f6f6a7e2": {
+      "ProjectGuid": "4bb3596e-f971-4bb1-bb6c-d288f6f6a7e2",
+      "DisplayName": "ProjectExamWebClient",
+      "ColorIndex": 8
+    }
+  },
+  "NextColorIndex": 9
+}

@@ -1,0 +1,5 @@
+﻿TODO
+
+-Kolla mappning av category, finns ingen mappning av patchcategory view model tex
+-fixa så att category respondar med id i viewmodellen
+-Skall det vara viewmodels som props i viewmodels

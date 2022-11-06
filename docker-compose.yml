@@ -1,0 +1,78 @@
+version: '3.4'
+
+networks:
+  backend:
+
+services:
+  customerdb:
+    container_name: customer-db
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    ports:
+        - 8001:1433 
+    environment:
+        - ACCEPT_EULA=Y
+        - SA_PASSWORD=password@1234#
+    networks:
+        - backend
+
+  customer:
+    container_name: customer-api
+    image: ${DOCKER_REGISTRY-}customer
+    build:
+      context: .
+      dockerfile: Costumer/Dockerfile
+    environment:
+        - DB_HOST=customerdb
+        - DB_NAME=customer
+        - DB_SA_PASSWORD=password@1234#
+    networks:
+     - backend
+
+
+  catalogdb:
+    container_name: catalog-db
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    ports:
+        - 8002:1433
+    environment:
+        - ACCEPT_EULA=Y
+        - SA_PASSWORD=password@1234#
+    networks:
+        - backend  
+  catalog:
+    container_name: catalog-api
+    image: ${DOCKER_REGISTRY-}catalog
+    build:
+      context: .
+      dockerfile: Catalog/Dockerfile
+    networks:
+        - backend
+    environment:
+        - DB_HOST=catalogdb
+        - DB_NAME=catalog
+        - DB_SA_PASSWORD=password@1234#
+
+
+  ocelotapigateway:
+    container_name: api-gateway
+    image: ${DOCKER_REGISTRY-}ocelotapigateway
+    build:
+      context: .
+      dockerfile: OcelotApiGateway/Dockerfile
+    ports:
+        - 8004:80
+    networks:
+        - backend
+
+
+
+
+  projectexamwebclient:
+    image: ${DOCKER_REGISTRY-}projectexamwebclient
+    build:
+      context: .
+      dockerfile: ProjectExamWebClient/Dockerfile
+    networks:
+        - backend
+    ports:
+     - 8009:80

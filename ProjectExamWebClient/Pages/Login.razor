@@ -1,0 +1,91 @@
+﻿@layout LoginLayout
+@page  "/"
+@*@using BlazorServerApp.Data
+@using Newtonsoft.Json
+@using BlazorServerApp.Services*@
+@using System.Security.Claims
+@using ProjectExamWebClient.FirebaseAuth
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager NavigationManager
+@inject IJSRuntime jsRunTime
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorage
+@inject IPersonLoginService perosnService
+@*@inject HttpClient Http*@
+@using Newtonsoft.Json
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@using ProjectExamWebClient.Data.Services.AuthProvider
+@using ProjectExamWebClient.ViewModels
+@using System.Net.Http.Headers
+@using System.Net
+@using Costumer.Models
+@using ProjectExamWebClient.Interfaces
+
+<center>
+<EditForm Model="@person" OnValidSubmit="@ValidateUser">
+<div>
+    <br /><br /><br /><br /><br />
+</div>
+´<div class="col-4 card">
+    <div class="pt-2">
+        <h3 style="font-weight:bold; color:purple">ProjectExam Login</h3>
+    </div>
+    <div>
+        <br />
+    </div>
+    <div class="col-12 row">
+        <input class="form-control col-12" @bind="person.Email" placeholder="email address" />
+    </div>
+    <br />
+    <div class="col-12 row">
+        <input type="password" class="form-control col-12" @bind="person.Password" placeholder="password" />
+    </div>
+    <br />
+    <div class="col-12 row">
+        <span class="col-12"></span>
+        <input type="submit" class="form-control col-6 btn btn-primary" value="Login" />
+    </div>
+    <br />
+    <div class="col-12 row" style="text-align:left; font-weight:bold">
+        @* <span class="col-12">@/*LoginMesssage*/</span>*@
+    </div>
+    <span class="col-12">@LoginMessage</span>
+</div>
+</EditForm>
+</center>
+
+@code {
+    private readonly FBAuth auth = new FBAuth();
+    private Person person;
+    public string LoginMessage { get; set; }
+    
+    protected override Task OnInitializedAsync()
+    {
+        
+        person = new Person();
+        return base.OnInitializedAsync();
+    }
+
+    private async Task<bool> ValidateUser()
+    {
+
+         
+        var returnedPerson = await perosnService.LoginAsync(person);
+
+        if (returnedPerson != null)
+        {
+            //returnedPerson = JsonConvert.DeserializeObject<Person>(returnedPerson);
+            await sessionStorage.SetItemAsync("email", person.Email);
+            await sessionStorage.SetItemAsync("email", person.Password);
+            ((StateProvider)AuthenticationStateProvider).MarkUserAsAuthenticated(returnedPerson.Email, returnedPerson.Password);
+            NavigationManager.NavigateTo("/index");
+        }
+        else
+        {
+            Console.WriteLine("");
+        }
+        
+
+
+        return await Task.FromResult(true);
+    }
+}
