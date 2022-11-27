@@ -2,6 +2,7 @@ using Costumer.Data;
 using Customer.Data;
 using Customer.Helpers;
 using Customer.Interfaces;
+using JWTAuhtenticationManager;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
 builder.Services.AddControllers();
+builder.Services.AddCustomJwtAuthentication();
+builder.Services.AddSingleton<JWTTokenHandler>();
+
 
 // Database Dependcy Injection
 var dbHost = Environment.GetEnvironmentVariable("DB_HOST");
@@ -34,6 +38,7 @@ var app = builder.Build();
 
 //app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

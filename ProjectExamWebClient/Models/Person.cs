@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Cryptography;
 using Customer.Models;
+using ProjectExamWebClient.Models;
 
 namespace Costumer.Models
 {
@@ -18,6 +19,7 @@ namespace Costumer.Models
         public Company? Company { get; set; }
         public Role? Role { get; set; }
         public string Password { get; set; }
+        public Token? Token { get; set; }
 
     }
 }

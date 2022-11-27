@@ -58,7 +58,6 @@ services:
     tty: true
 
   projectexamwebclient:
-    container_name: ProjectExamWebClient
     build:
       labels:
         com.microsoft.created-by: "visual-studio"

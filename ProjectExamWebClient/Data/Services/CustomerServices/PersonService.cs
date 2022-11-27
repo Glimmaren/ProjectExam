@@ -1,18 +1,22 @@
 ﻿using System.Net;
 using System.Net.Http.Headers;
+using Blazored.SessionStorage;
 using Costumer.Models;
 using Newtonsoft.Json;
 using ProjectExamWebClient.Data.Services.AuthProvider;
 using ProjectExamWebClient.Interfaces;
+
 
 namespace ProjectExamWebClient.Data.Services.CustomerServices
 {
     public class PersonService : IPersonLoginService
     {
         public HttpClient _httpClient { get; }
+        private readonly ISessionStorageService _sessionStorage;
 
-        public PersonService(HttpClient httpClient)
+        public PersonService(HttpClient httpClient, ISessionStorageService sessionStorage)
         {
+            _sessionStorage = sessionStorage;
             _httpClient = httpClient;
         }
 
@@ -25,20 +29,27 @@ namespace ProjectExamWebClient.Data.Services.CustomerServices
         {
             string serializedUser = JsonConvert.SerializeObject(person);
 
-            var requestMessage = new HttpRequestMessage(HttpMethod.Get, "Person/login");
+            var requestMessage = new HttpRequestMessage(HttpMethod.Post, "Person/login");
             requestMessage.Content = new StringContent(serializedUser);
+            
 
             requestMessage.Content.Headers.ContentType
                 = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
 
             var response = await _httpClient.SendAsync(requestMessage);
 
-            var responseStatusConde = response.StatusCode;
-            var responseBody = await response.Content.ReadAsStringAsync();
+            var responseStatusCode = response.StatusCode;
+            if (responseStatusCode == HttpStatusCode.OK)
+            {
+                var responseBody = await response.Content.ReadAsStringAsync();
 
-            var returnedUser = JsonConvert.DeserializeObject<Person>(responseBody);
-
-            return await Task.FromResult(returnedUser);
+                var returnedUser = JsonConvert.DeserializeObject<Person>(responseBody);
+                
+                return await Task.FromResult(returnedUser);
+            }
+            
+            return null;
+            
         }
 
         public Task<Person> RefreshTokenAsync(RefreshRequest refreshRequest)
@@ -78,6 +89,9 @@ namespace ProjectExamWebClient.Data.Services.CustomerServices
         public async Task<IList<Person>> ListAllPersons()
         {
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, "person");
+            var token = await _sessionStorage.GetItemAsStringAsync("Token");
+            requestMessage.Headers.Authorization = _httpClient.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", token.Substring(1, token.Length - 2));
 
             var responseMessage = await _httpClient.SendAsync(requestMessage);
             var responeStatusCode = responseMessage.StatusCode;

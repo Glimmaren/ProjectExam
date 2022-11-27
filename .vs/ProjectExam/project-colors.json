@@ -50,7 +50,22 @@
       "ProjectGuid": "4bb3596e-f971-4bb1-bb6c-d288f6f6a7e2",
       "DisplayName": "ProjectExamWebClient",
       "ColorIndex": 8
+    },
+    "ba6bdfdd-f351-441f-9192-f2deaf57c78e": {
+      "ProjectGuid": "ba6bdfdd-f351-441f-9192-f2deaf57c78e",
+      "DisplayName": "JWTAuhtenticationManager",
+      "ColorIndex": 9
+    },
+    "d54d02ea-5b9a-498b-a940-3ebab8e9ed85": {
+      "ProjectGuid": "d54d02ea-5b9a-498b-a940-3ebab8e9ed85",
+      "DisplayName": "AuthenticationWebAPI",
+      "ColorIndex": 10
+    },
+    "fc462feb-28c6-4c88-844d-82d7e2350ec1": {
+      "ProjectGuid": "fc462feb-28c6-4c88-844d-82d7e2350ec1",
+      "DisplayName": "AuthenticationWebAPI",
+      "ColorIndex": 11
     }
   },
-  "NextColorIndex": 9
+  "NextColorIndex": 12
 }

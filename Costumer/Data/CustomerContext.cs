@@ -12,8 +12,7 @@ namespace Costumer.Data
         {
             try
             {
-                var dbCreator = Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator;
-                if (dbCreator != null)
+                if (Database.GetService<IDatabaseCreator>() is RelationalDatabaseCreator dbCreator)
                 {
                     if(!dbCreator.CanConnect()) dbCreator.Create();
                     if(!dbCreator.HasTables()) dbCreator.CreateTables();

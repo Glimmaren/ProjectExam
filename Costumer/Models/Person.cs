@@ -22,6 +22,9 @@ namespace Costumer.Models
         public Role? Role { get; set; }
         [PasswordPropertyText]
         public string Password { get; set; }
+        [NotMapped]
+        public Token? Token { get; set; }
+
 
     }
 }

@@ -62,4 +62,7 @@ C:\Users\glimm\OneDrive\Dokument\ITHS\Projects\ProjectExam\Costumer\obj\Debug\ne
 C:\Users\glimm\OneDrive\Dokument\ITHS\Projects\ProjectExam\Costumer\obj\Debug\net6.0\Customer.pdb
 C:\Users\glimm\OneDrive\Dokument\ITHS\Projects\ProjectExam\Costumer\obj\Debug\net6.0\Customer.genruntimeconfig.cache
 C:\Users\glimm\OneDrive\Dokument\ITHS\Projects\ProjectExam\Costumer\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
-C:\Users\glimm\OneDrive\Dokument\ITHS\Projects\ProjectExam\Costumer\bin\Debug\net6.0\firebase-config.json
+C:\Users\glimm\OneDrive\Dokument\ITHS\Projects\ProjectExam\Costumer\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\glimm\OneDrive\Dokument\ITHS\Projects\ProjectExam\Costumer\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\glimm\OneDrive\Dokument\ITHS\Projects\ProjectExam\Costumer\bin\Debug\net6.0\JWTAuhtenticationManager.dll
+C:\Users\glimm\OneDrive\Dokument\ITHS\Projects\ProjectExam\Costumer\bin\Debug\net6.0\JWTAuhtenticationManager.pdb

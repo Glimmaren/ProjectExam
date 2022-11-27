@@ -1,4 +1,5 @@
-﻿using Costumer.Models;
+﻿using System.Net;
+using Costumer.Models;
 using Newtonsoft.Json;
 using ProjectExamWebClient.Interfaces;
 
@@ -14,9 +15,29 @@ namespace ProjectExamWebClient.Data.Services.CustomerServices
             //httpClient.BaseAddress = new Uri("")
         }
 
-        public Task<bool> AddRole(Role role)
+        public async Task<bool> AddRole(Role role)
         {
-            throw new NotImplementedException();
+            var serializedRole = JsonConvert.SerializeObject(role);
+            var requestMessage = new HttpRequestMessage(HttpMethod.Post, "role");
+            requestMessage.Content = new StringContent(serializedRole);
+
+            requestMessage.Content.Headers.ContentType
+                = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+
+            var response = await _httpClient.SendAsync(requestMessage);
+
+            var responseStatusConde = response.StatusCode;
+            var responseBody = await response.Content.ReadAsStringAsync();
+
+            if (responseStatusConde == HttpStatusCode.OK)
+            {
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public bool DeleteRole(Role role)

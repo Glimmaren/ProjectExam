@@ -1,9 +1,14 @@
 ﻿using AutoMapper;
 using Costumer.Models;
 using Customer.Interfaces;
+using Customer.Models;
 using Customer.ViewModels.CompanyViewModels;
 using Customer.ViewModels.PersonViewModels;
+using JWTAuhtenticationManager;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.OpenApi.Validations;
+
 
 namespace Customer.Controllers
 {
@@ -13,14 +18,17 @@ namespace Customer.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly JWTTokenHandler _jwtTokenHandler;
 
-        public PersonController(IMapper mapper, IUnitOfWork unitOfWork)
+        public PersonController(IMapper mapper, IUnitOfWork unitOfWork, JWTTokenHandler jwtTokenHandler)
         {
+            _jwtTokenHandler = jwtTokenHandler;
             _mapper = mapper;
             _unitOfWork = unitOfWork;
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AddPerson(PostPersonViewModel model)
         {
             var person = _mapper.Map<Person>(model);
@@ -31,17 +39,24 @@ namespace Customer.Controllers
             return StatusCode(500, "Could not add Person");
         }
 
-        [HttpGet("Login")]
+        [HttpPost("Login")]
         public async Task<IActionResult> Login([FromBody] Person person)
         {
             var result = await _unitOfWork.PersonRepository.Login(person);
             if (result == null) return NotFound();
+            
+            
+            var authenticationResponse = _jwtTokenHandler.GenerateJWTToken(result.Email, result.Role.Name);
+            if (authenticationResponse == null) return Unauthorized();
+
+            result.Token = _mapper.Map<Token>(authenticationResponse);
 
             return Ok(result);
         }
-        
+
 
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<IActionResult> GetPerson(int id)
         {
             var result = await _unitOfWork.PersonRepository.FindPersonById(id);
@@ -53,6 +68,7 @@ namespace Customer.Controllers
         }
 
         [HttpGet("{lastName}")]
+        [Authorize]
         public async Task<IActionResult> GetPersonsByLastName(string lastName)
         {
             var result = await _unitOfWork.PersonRepository.FindPersonsByLastName(lastName);
@@ -64,6 +80,7 @@ namespace Customer.Controllers
         }
 
         [HttpGet("{firstName}")]
+        [Authorize]
         public async Task<IActionResult> GetPersonsByFirstName(string firstName)
         {
             var result = await _unitOfWork.PersonRepository.FindPersonsByFirstName(firstName);
@@ -76,6 +93,7 @@ namespace Customer.Controllers
 
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetPerson()
         {
             var result = await _unitOfWork.PersonRepository.ListAllPersons();
@@ -87,6 +105,7 @@ namespace Customer.Controllers
         }
 
         [HttpPatch("{id}")]
+        [Authorize]
         public async Task<IActionResult> UpdatePerson(int id, PatchPersonViewModel model)
         {
             var toUpdate = await _unitOfWork.PersonRepository.FindPersonById(id);
@@ -107,6 +126,7 @@ namespace Customer.Controllers
         }
 
         [HttpDelete("{id:int}")]
+        [Authorize]
         public async Task<IActionResult> DeletePerson(int id)
         {
             var result = await _unitOfWork.PersonRepository.FindPersonById(id);

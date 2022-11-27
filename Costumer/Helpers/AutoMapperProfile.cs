@@ -8,6 +8,7 @@ using Customer.ViewModels.CompanyGroupViewModels;
 using Customer.ViewModels.CompanyViewModels;
 using Customer.ViewModels.PersonViewModels;
 using Customer.ViewModels.RoleViewModels;
+using JWTAuhtenticationManager.Models;
 
 namespace Customer.Helpers
 {
@@ -64,6 +65,9 @@ namespace Customer.Helpers
 
             CreateMap<Person, PersonViewModel>();
             CreateMap<PersonViewModel, Person>();
+
+            //Outhers
+            CreateMap<AuthenticationResponse, Token>();
 
         }
     }

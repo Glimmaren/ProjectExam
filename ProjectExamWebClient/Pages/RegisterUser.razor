@@ -1,0 +1,139 @@
+﻿
+
+@using Costumer.Models
+@using Customer.Models
+@using Microsoft.AspNetCore.Components
+@using ProjectExamWebClient.Data.Services.CustomerServices
+@inject IRoleService roleService
+@inject ICompanyService companyService
+@inject IPersonLoginService personService
+@using ProjectExamWebClient.Interfaces
+@using System.Security.Cryptography.X509Certificates
+@using Syncfusion.Blazor.RichTextEditor.Internal
+@using Syncfusion.Blazor.TreeGrid.Internal
+
+
+@if (Visible)
+{
+
+    <EditForm Model="@newPerson" OnValidSubmit="@AddPerson">
+        <div>
+            <br/><br/><br/><br/><br/>
+        </div>
+        <div>
+            <h3 style="font-weight: bold; color: purple">Lägg till Person</h3>
+        </div>
+        <div>
+            <br/>
+        </div>
+        <div class="col-12 row">
+            <input class="form-control col-12" @bind="newPerson.FirstName" placeholder="first name"/>
+        </div>
+        <br/>
+        <div class="col-12 row">
+            <input class="form-control col-12" @bind="newPerson.LastName" placeholder="last name"/>
+        </div>
+        <br/>
+        <div class="col-12 row">
+            <input class="form-control col-12" @bind="newPerson.PhoneNumber" placeholder="telefonnummer"/>
+        </div>
+        <br/>
+        <div class="col-12 row">
+            <SfComboBox TItem="Company" TValue="string" DataSource="@companies" Placeholder="företag">
+                <ComboBoxEvents TValue="string" TItem="Company" OnValueSelect="@OnCompanyValueSelectHandler"></ComboBoxEvents>
+                <ComboBoxFieldSettings Value="Id" Text="Name">
+                </ComboBoxFieldSettings>
+            </SfComboBox>
+        </div>
+        <br/>
+        <div class="col-12 row">
+            <SfComboBox TItem="Role" TValue="string" DataSource="@roles" Placeholder="roll">
+                <ComboBoxEvents TValue="string" TItem="Role" OnValueSelect="@OnRoleValueSelectHandler"></ComboBoxEvents>
+                <ComboBoxFieldSettings Value="Id" Text="Name">
+                </ComboBoxFieldSettings>
+            </SfComboBox>
+        </div>
+        <br/>
+        <div class="col-12 row">
+            <input class="form-control col-12" @bind="newPerson.Email" placeholder="email address"/>
+        </div>
+        <br/>
+        <div class="col-12 row">
+            <input class="form-control col-12" @bind="newPerson.Password" placeholder="password"/>
+        </div>
+        <br/>
+        <br/>
+        <div class="col-12 row">
+            <span class="col-12"></span>
+            <input type="submit" class="form-control col-6 btn btn-primary" value="Lägg Till Användare"/>
+        </div>
+        <br/>
+        <div class="col-12 row" style="text-align: left; font-weight: bold">
+            <span class="col-12">@LoginMessage</span>
+        </div>
+
+        <div class="col-12">
+
+
+        </div>
+    </EditForm>
+}
+@code {
+    public Person newPerson { get; set; }
+    public Person person { get; set; }
+    public string LoginMessage { get; set; }
+    public IList<Role> roles { get; set; }
+    public IList<Company> companies { get; set; }
+    public int selectedRoleId { get; set; }
+    public int selectedCompanyId { get; set; }
+
+
+
+    [Parameter]
+    public bool Visible { get; set; } = false;
+    [Parameter] public Action UpdateGrid { get; set; } 
+
+    protected override async Task OnInitializedAsync()
+    {
+        newPerson = new Person();
+        person = new Person();
+        companies = await PopulateCompanies();
+        roles = await PopulateRoles();
+        await base.OnInitializedAsync();
+    }
+
+
+    private async Task<IList<Role>> PopulateRoles()
+    {
+        return await roleService.ListAllRoles();
+    }
+
+    private async Task<IList<Company>> PopulateCompanies()
+    {
+        return await companyService.ListAllCompanies();
+    }
+
+
+    private void OnRoleValueSelectHandler(SelectEventArgs<Role> args)
+    {
+        selectedRoleId = args.ItemData.Id;
+    }
+
+    private void OnCompanyValueSelectHandler(SelectEventArgs<Company> args)
+    {
+        selectedCompanyId = args.ItemData.Id;
+    }
+
+    private async Task AddPerson()
+    {
+
+        newPerson.CompanyId = selectedCompanyId;
+        newPerson.RoleId = selectedRoleId;
+        await personService.RegisterUserAsync(newPerson);
+        person = new Person();
+        UpdateGrid?.Invoke();
+    }
+
+
+}
+

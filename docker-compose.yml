@@ -64,10 +64,18 @@ services:
     networks:
         - backend
 
+  authenticationwebapi:
+    image: ${DOCKER_REGISTRY-}authenticationwebapi
+    build:
+      context: .
+      dockerfile: AuthenticationWebAPI/Dockerfile
+    networks:
+        - backend
 
 
 
   projectexamwebclient:
+    container_name: projectexam-webclient
     image: ${DOCKER_REGISTRY-}projectexamwebclient
     build:
       context: .
@@ -76,3 +84,5 @@ services:
         - backend
     ports:
      - 8009:80
+
+

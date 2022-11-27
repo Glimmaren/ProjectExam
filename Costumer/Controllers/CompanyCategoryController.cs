@@ -3,12 +3,14 @@ using Costumer.Models;
 using Customer.Interfaces;
 using Customer.ViewModels.CompanyCategoryViewModels;
 using Customer.ViewModels.CompanyGroupViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Customer.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CompanyCategoryController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -21,6 +23,7 @@ namespace Customer.Controllers
         }
 
         [HttpPost]
+        [Authorize (Roles ="Admin")]
         public async Task<IActionResult> AddCompanyGroup(PostCompanyCategoryViewModel model)
         {
             var companyCategory = _mapper.Map<CompanyCategory>(model);

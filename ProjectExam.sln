@@ -11,11 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Microsevices", "Microsevice
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{359D11E4-1A2C-4118-9B06-3DBA5EB6D0BA}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backup", "Backup", "{4B2AC5B2-52C0-4613-AAA6-20AC183B3381}"
-	ProjectSection(SolutionItems) = preProject
-		OcelotAPIGateway\ocelot.json = OcelotAPIGateway\ocelot.json
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GateWays", "GateWays", "{B4E7D0D8-3786-4C47-AA2A-A1EA1B90BAE2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OcelotApiGateway", "OcelotApiGateway\OcelotApiGateway.csproj", "{D95A1FC3-5F25-4E25-8059-99E18D8DB163}"
@@ -23,6 +18,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clients", "Clients", "{87B92B02-6902-49BB-9E1C-A01FC20DEBF5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectExamWebClient", "ProjectExamWebClient\ProjectExamWebClient.csproj", "{4BB3596E-F971-4BB1-BB6C-D288F6F6A7E2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JWTAuhtenticationManager", "JWTAuhtenticationManager\JWTAuhtenticationManager.csproj", "{BA6BDFDD-F351-441F-9192-F2DEAF57C78E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,6 +47,10 @@ Global
 		{4BB3596E-F971-4BB1-BB6C-D288F6F6A7E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4BB3596E-F971-4BB1-BB6C-D288F6F6A7E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4BB3596E-F971-4BB1-BB6C-D288F6F6A7E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA6BDFDD-F351-441F-9192-F2DEAF57C78E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA6BDFDD-F351-441F-9192-F2DEAF57C78E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA6BDFDD-F351-441F-9192-F2DEAF57C78E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA6BDFDD-F351-441F-9192-F2DEAF57C78E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

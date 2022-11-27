@@ -41,7 +41,6 @@ C:\Users\glimm\OneDrive\Dokument\ITHS\Projects\ProjectExam\bin\Debug\Microsoft.A
 C:\Users\glimm\OneDrive\Dokument\ITHS\Projects\ProjectExam\bin\Debug\Microsoft.AspNetCore.JsonPatch.dll
 C:\Users\glimm\OneDrive\Dokument\ITHS\Projects\ProjectExam\bin\Debug\Newtonsoft.Json.Bson.dll
 C:\Users\glimm\OneDrive\Dokument\ITHS\Projects\ProjectExam\bin\Debug\OcelotApiGateway.pdb
-C:\Users\glimm\OneDrive\Dokument\ITHS\Projects\ProjectExam\bin\Debug\firebase-config.json
 C:\Users\glimm\OneDrive\Dokument\ITHS\Projects\ProjectExam\bin\Debug\ProjectExamWebClient.deps.json
 C:\Users\glimm\OneDrive\Dokument\ITHS\Projects\ProjectExam\bin\Debug\ProjectExamWebClient.runtimeconfig.json
 C:\Users\glimm\OneDrive\Dokument\ITHS\Projects\ProjectExam\bin\Debug\ProjectExamWebClient.staticwebassets.runtime.json
@@ -58,3 +57,13 @@ C:\Users\glimm\OneDrive\Dokument\ITHS\Projects\ProjectExam\bin\Debug\Syncfusion.
 C:\Users\glimm\OneDrive\Dokument\ITHS\Projects\ProjectExam\bin\Debug\Syncfusion.PdfExport.Net.dll
 C:\Users\glimm\OneDrive\Dokument\ITHS\Projects\ProjectExam\bin\Debug\Syncfusion.ExcelExport.Net.dll
 C:\Users\glimm\OneDrive\Dokument\ITHS\Projects\ProjectExam\bin\Debug\Syncfusion.Licensing.dll
+C:\Users\glimm\OneDrive\Dokument\ITHS\Projects\ProjectExam\bin\Debug\JWTAuhtenticationManager.dll
+C:\Users\glimm\OneDrive\Dokument\ITHS\Projects\ProjectExam\bin\Debug\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\glimm\OneDrive\Dokument\ITHS\Projects\ProjectExam\bin\Debug\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\glimm\OneDrive\Dokument\ITHS\Projects\ProjectExam\bin\Debug\Microsoft.IdentityModel.Tokens.dll
+C:\Users\glimm\OneDrive\Dokument\ITHS\Projects\ProjectExam\bin\Debug\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\glimm\OneDrive\Dokument\ITHS\Projects\ProjectExam\bin\Debug\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\glimm\OneDrive\Dokument\ITHS\Projects\ProjectExam\bin\Debug\Microsoft.IdentityModel.Protocols.dll
+C:\Users\glimm\OneDrive\Dokument\ITHS\Projects\ProjectExam\bin\Debug\Microsoft.IdentityModel.Logging.dll
+C:\Users\glimm\OneDrive\Dokument\ITHS\Projects\ProjectExam\bin\Debug\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\glimm\OneDrive\Dokument\ITHS\Projects\ProjectExam\bin\Debug\JWTAuhtenticationManager.pdb

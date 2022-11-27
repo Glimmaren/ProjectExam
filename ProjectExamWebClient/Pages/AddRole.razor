@@ -1,0 +1,86 @@
+﻿
+
+@using Costumer.Models
+@using Customer.Models
+@using Microsoft.AspNetCore.Components
+@using ProjectExamWebClient.Data.Services.CustomerServices
+@inject IRoleService roleService
+@using ProjectExamWebClient.Interfaces
+@using Syncfusion.Blazor.Grids
+
+
+
+@if (Visible)
+{
+    <div class="row">
+        <div class="col-6">
+            <EditForm Model="@role" OnValidSubmit="@AddNewRole">
+                <div>
+                    <br/><br/>
+                </div>
+                <div>
+                    <h3 style="font-weight: bold; color: purple">Add Role</h3>
+                </div>
+                <div>
+                    <br/>
+                </div>
+                <div class="col-12 row">
+                    <input class="form-control col-12" @bind="role.Name" placeholder="roll"/>
+                </div>
+                <br/>
+
+                <div class="col-12 row">
+                </div>
+                <br/>
+                <div class="col-12 row">
+                    <span class="col-12"></span>
+                    <input type="submit" class="form-control col-6 btn btn-primary" value="Lägg Till Roll"/>
+                </div>
+                <br/>
+                <div class="col-12 row" style="text-align: left; font-weight: bold">
+                </div>
+            </EditForm>
+        </div>
+        <div class="col-6">
+            <br/><br/><br/><br/>
+            <SfGrid @ref="Grid" DataSource="@roles" AllowSorting="true">
+                <GridColumns>
+                    <GridColumn Field=@nameof(role.Name) HeaderText="Roll" TextAlign="TextAlign.Center" Width="60"></GridColumn>
+                </GridColumns>
+            </SfGrid>
+        </div>
+    </div>
+}
+@code {
+
+    public IList<Role> roles { get; set; }
+    public Role role { get; set; }
+    SfGrid<Role> Grid { get; set; }
+
+
+    [Parameter]
+    public bool Visible { get; set; } = false;
+    //[Parameter] public Action UpdateGrid { get; set; } 
+
+    protected override async Task OnInitializedAsync()
+    {
+        role = new Role();
+        roles = await PopulateRoles();
+        await base.OnInitializedAsync();
+    }
+
+    private async Task<IList<Role>> PopulateRoles()
+    {
+        return await roleService.ListAllRoles();
+    }
+
+    private async Task AddNewRole()
+    {
+        await roleService.AddRole(role);
+        role = new Role();
+        await Grid.Refresh();
+    }
+
+}
+
+

@@ -86,7 +86,6 @@ services:
 
   projectexamwebclient:
     image: projectexamwebclient:dev
-    container_name: ProjectExamWebClient
     build:
       target: base
       labels:

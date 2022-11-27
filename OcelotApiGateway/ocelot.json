@@ -1,5 +1,8 @@
 {
   "Routes": [
+
+
+    // Companygroup
     {
       "UpstreamPathTemplate": "/api/CompanyGroup",
       "UpstreamHttpMethod": [ "Get", "Post" ],
@@ -175,6 +178,18 @@
     {
       "UpstreamPathTemplate": "/api/Person/{name}",
       "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "customer",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Person/{name}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Person/Login",
+      "UpstreamHttpMethod": [ "Post" ],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
